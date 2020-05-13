@@ -18,6 +18,9 @@ public class User {
         this.country = country;
     }
 
+    // NB. Needed by Jackson
+    public User() {}
+
     public String getFirstName() {
         return firstName;
     }

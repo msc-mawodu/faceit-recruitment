@@ -1,5 +1,6 @@
 package com.mawodu.faceit;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,5 +36,10 @@ public class UserServiceConfig {
     @Autowired
     public UserStore userStore(JdbcTemplate jdbc) {
         return new UserStore(jdbc);
+    }
+
+    @Bean
+    public UserParser userParser(){
+        return new UserParser(new ObjectMapper());
     }
 }
