@@ -50,13 +50,19 @@ public class UserStore {
                 user.getEmail()) > 0;
     }
 
-    public List<String> fetchUsers() {
-        List<String> users = new ArrayList<>();
-        jdbc.query("SELECT DISTINCT nickname FROM " + USER_TABLE_NAME, result -> {
-            users.add(result.getString(1));
+    public List<User> fetchUsers() {
+        List<User> users = new ArrayList<>();
+        jdbc.query("SELECT * FROM " + USER_TABLE_NAME, result -> {
+            users.add(
+                new User(result.getString(1),
+                        result.getString(2),
+                        result.getString(3),
+                        result.getString(4),
+                        result.getString(5),
+                        result.getString(6))
+            );
         });
 
         return users;
     }
-
 }

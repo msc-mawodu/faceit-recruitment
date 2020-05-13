@@ -51,6 +51,4 @@ public class UserParserTest {
         return "{\"firstName\":\"name\",\"lastName\":\"surname\",\"nickname\":\"nick\",\"password\":\"pwd\",\"email\":\"em@il.com\",\"country\":\"country\"}";
     }
 
-
-
 }

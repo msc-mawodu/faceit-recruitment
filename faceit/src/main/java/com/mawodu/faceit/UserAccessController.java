@@ -5,16 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.Map;
 
 @RestController
 public class UserAccessController {
 
-    private UserStore userStore;
+    TransactionsHandler handler;
 
     @Autowired
-    public UserAccessController(UserStore userStore) {
-        this.userStore = userStore;
+    public UserAccessController(TransactionsHandler handler) {
+        this.handler = handler;
     }
 
     @GetMapping(Routes.BASE)
@@ -26,27 +25,29 @@ public class UserAccessController {
     }
 
     @PostMapping(Routes.ADD_NEW_USER)
-    public String createUser(@RequestBody Map<String, Object> userJSON) {
-        return "ok";
+    public String createUser(@RequestBody String userJSON) {
+        handler.createUser(userJSON);
+        // todo: handler should return boolean success/fail
+        return "";
     }
 
-
     @PostMapping(Routes.EDIT_USER)
-    public User editUser(@RequestBody Map<String, Object> userJSON) {
+    public User editUser(@RequestBody String userJSON) {
         return null;
     }
 
 
     // NB. delete requires exact match on all fields (apart from password)
     @PostMapping(Routes.DELETE_USER)
-    public User deleteUser(@RequestBody Map<String, Object> userJSON) {
-        return null;
+    public String deleteUser(@RequestBody String userJSON) {
+        handler.createUser(userJSON);
+        // todo: handler should return boolean success/fail
+        return "";
     }
 
-
-    @PostMapping(Routes.FETCH_ALL_USERS)
-    public User fetchAllUsers() {
-        return null;
+    @GetMapping(Routes.FETCH_ALL_USERS)
+    public String fetchAllUsers() {
+        return handler.fetchAllUsers();
     }
 
 }
