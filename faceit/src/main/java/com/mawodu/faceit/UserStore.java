@@ -19,8 +19,8 @@ public class UserStore {
     public void save(User user) {
         // jdbc update uses prepared statement, so basic injection prevention is satisfied.
         jdbc.update("insert into " + USER_TABLE_NAME +
-                        " (firstName, lastName, nickname, password, email, country)" +
-                        "values (?, ?, ?, ?, ?, ?)",
+                        " (forename, surname, nickname, password, email, country)" +
+                        " values (?, ?, ?, ?, ?, ?)",
                 user.getFirstName(),
                 user.getLastName(),
                 user.getNickname(),
@@ -28,6 +28,26 @@ public class UserStore {
                 user.getEmail(),
                 user.getCountry()
         );
+    }
+
+    public void delete(User user) {
+        // jdbc update uses prepared statement, so basic injection prevention is satisfied.
+        jdbc.update(" delete from " + USER_TABLE_NAME +
+                        " where forename=? AND surname=? AND nickname=? AND email=?",
+                user.getFirstName(),
+                user.getLastName(),
+                user.getNickname(),
+                user.getEmail()
+        );
+    }
+
+    public boolean userExists(User user) {
+        return jdbc.queryForObject("SELECT count(*) FROM " + USER_TABLE_NAME +
+                        " where forename=? AND surname=? AND nickname=? AND email=?", Integer.class,
+                user.getFirstName(),
+                user.getLastName(),
+                user.getNickname(),
+                user.getEmail()) > 0;
     }
 
     public List<String> fetchUsers() {

@@ -1,0 +1,1 @@
+ALTER TABLE faceit_user.user MODIFY COLUMN id INT auto_increment;

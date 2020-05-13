@@ -1,6 +1,7 @@
 package com.mawodu.faceit;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -8,6 +9,13 @@ import java.util.Map;
 
 @RestController
 public class UserAccessController {
+
+    private UserStore userStore;
+
+    @Autowired
+    public UserAccessController(UserStore userStore) {
+        this.userStore = userStore;
+    }
 
     @GetMapping(Routes.BASE)
     public String showEndpoints() {
@@ -18,8 +26,8 @@ public class UserAccessController {
     }
 
     @PostMapping(Routes.ADD_NEW_USER)
-    public User createUser(@RequestBody Map<String, Object> userJSON) {
-        return null;
+    public String createUser(@RequestBody Map<String, Object> userJSON) {
+        return "ok";
     }
 
 
@@ -40,6 +48,5 @@ public class UserAccessController {
     public User fetchAllUsers() {
         return null;
     }
-
 
 }
