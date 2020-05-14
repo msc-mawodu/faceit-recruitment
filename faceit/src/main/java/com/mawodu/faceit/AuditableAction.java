@@ -10,14 +10,9 @@ import java.lang.annotation.Target;
 public @interface AuditableAction {
 
     Event event();
-    Destination destination() default Destination.DATABASE;
     String comment() default "";
 
     enum Event {
-        USER_CREATED, USER_DELETED, USER_UPDATED, USER_FETCH
-    }
-
-    enum Destination {
-        DATABASE
+        USER_CREATED, USER_UPDATED, USER_READ, USER_DELETED, FETCH_ALL_USERS
     }
 }
