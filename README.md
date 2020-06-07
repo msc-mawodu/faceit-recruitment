@@ -1,6 +1,4 @@
-# faceit-recruitment
-Faceit recruitment task.
-
+# Microservice exercise
 
 # installation and running 
 
